@@ -940,4 +940,244 @@ Ici, un livre peut être écrit par un ou plusieurs auteurs (1,n), et un auteur 
 
 
 
+### 1.6 Les relations ternaires
+
+Une relation ternaire implique trois entités.
+
+**Exemple concret :** Dans un système de gestion d'université, on pourrait avoir une relation ternaire "Enseigne" entre les entités "PROFESSEUR", "COURS" et "SALLE".
+
+Représentation graphique :
+
+```plaintext
+       +------------+
+       | PROFESSEUR |
+       +------------+
+            |
+            | Enseigne
+            |
++--------+  |  +--------+
+| COURS  |--+--| SALLE  |
++--------+     +--------+
+```
+
+Cette relation indique quel professeur enseigne quel cours dans quelle salle.
+
+### 1.7 Contraintes d'intégrité (CIF) et règles de modélisation
+
+Les Contraintes d'Intégrité Fonctionnelle (CIF) sont des règles qui garantissent la cohérence des données.
+
+**Exemple concret de CIF :** Dans notre système de bibliothèque, une CIF pourrait être : "Un adhérent ne peut pas emprunter plus de 5 livres simultanément."
+
+Représentation graphique d'une CIF :
+
+```plaintext
++----------+   0,5    Emprunte    0,n   +--------+
+| ADHERENT |-------------------------->| LIVRE  |
++----------+                           +--------+
+```
+
+## Règles de modélisation 
+
+
+ **Définir clairement les cardinalités des relations** : Chaque relation doit être accompagnée de cardinalités (1,1 ; 1,N ; 0,1 ; N,N) qui spécifient combien d'instances d'une entité peuvent être associées à une instance de l'autre entité.
+
+ **Éviter les entités vides ou inutiles** : Ne modélisez pas d'entités qui ne contiennent aucune information ou qui ne sont pas nécessaires pour le modèle de données.
+
+ **Choisir des noms d'entités et d'attributs explicites** : Les noms des entités et des attributs doivent être clairs et significatifs pour que l'on puisse facilement comprendre ce qu'ils représentent (par exemple, **Client**, **Date_Commande**, etc.).
+
+ **Respecter l'intégrité des données** : Assurez-vous que les entités respectent les contraintes d'intégrité, telles que l'intégrité référentielle, ce qui garantit que les données restent cohérentes et valides.
+
+ **Utiliser des entités faibles si nécessaire** : Lorsqu'une entité dépend d'une autre pour son identification, utilisez une entité faible, identifiée par une clé composée de l'entité forte et d'un attribut supplémentaire.
+
+
+## 2. Méthodologie de construction
+
+### 2.1 Analyse du cahier des charges
+
+1. **Lire attentivement** le cahier des charges.
+2. **Identifier** les entités principales.
+3. **Lister** les attributs de chaque entité.
+4. **Déterminer** les relations entre les entités.
+
+
+**Exemple concret :**
+Imaginons que nous devons concevoir un système de gestion pour un petit hôtel. Voici un extrait du cahier des charges :
+
+"L'hôtel dispose de 20 chambres, chacune ayant un numéro unique, un type (simple, double, suite) et un tarif. Les clients réservent des chambres pour des périodes spécifiques. Chaque client a un nom, un prénom, une adresse email et un numéro de téléphone. L'hôtel propose également des services optionnels comme le petit-déjeuner, le service de chambre et la blanchisserie."
+
+Analyse :
+
+- Entités identifiées : CHAMBRE, CLIENT, RESERVATION, SERVICE
+- Attributs (exemples) :
+
+- CHAMBRE : Numéro, Type, Tarif
+- CLIENT : Nom, Prénom, Email, Téléphone
+
+
+
+- Relations :
+
+- Un CLIENT fait une RESERVATION
+- Une RESERVATION concerne une CHAMBRE
+- Une RESERVATION peut inclure des SERVICES
+
+
+
+
+
+### 2.2 Création d'un MCD étape par étape
+
+Prenons l'exemple de l'hôtel pour illustrer chaque étape :
+
+1. **Dessiner les entités** :
+
+```plaintext
++----------+   +----------+   +-------------+   +---------+
+| CHAMBRE  |   | CLIENT   |   | RESERVATION |   | SERVICE |
++----------+   +----------+   +-------------+   +---------+
+```
+
+
+2. **Ajouter les attributs** :
+
+```plaintext
++---------------+   +---------------+   +------------------+   +-------------+
+|    CHAMBRE    |   |    CLIENT     |   |   RESERVATION    |   |   SERVICE   |
++---------------+   +---------------+   +------------------+   +-------------+
+| Numéro        |   | ID_Client     |   | ID_Reservation   |   | ID_Service  |
+| Type          |   | Nom           |   | Date_Début       |   | Nom         |
+| Tarif         |   | Prénom        |   | Date_Fin         |   | Prix        |
++---------------+   | Email         |   +------------------+   +-------------+
+                    | Téléphone     |
+                    +---------------+
+```
+
+
+3. **Établir les associations** :
+
+```plaintext
++----------+   fait    +-------------+  concerne  +----------+
+| CLIENT   |---------->| RESERVATION |<-----------| CHAMBRE  |
++----------+           +-------------+            +----------+
+                             |
+                             | inclut
+                             v
+                       +---------+
+                       | SERVICE |
+                       +---------+
+```
+
+
+4. **Définir les cardinalités** :
+
+```plaintext
++----------+ 1,n   fait    0,n +-------------+ 1,1 concerne 0,n +----------+
+| CLIENT   |-------------->| RESERVATION |<-----------------| CHAMBRE  |
++----------+               +-------------+                  +----------+
+                                 | 0,n
+                                 | inclut
+                                 v 0,n
+                           +---------+
+                           | SERVICE |
+                           +---------+
+```
+
+
+5. **Vérifier et optimiser** :
+
+1. S'assurer que toutes les entités ont un identifiant unique.
+2. Vérifier que les cardinalités reflètent correctement les règles métier.
+3. S'assurer qu'il n'y a pas de redondance dans le modèle.
+
+
+
+
+
+### 2.3 MCD - CIF (Contraintes d'Intégrité Fonctionnelle)
+
+Les CIF sont des règles qui garantissent la cohérence des données. Elles sont généralement représentées par des flèches dans le MCD.
+
+**Exemple concret :**
+Dans notre système hôtelier, une CIF pourrait être : "Une chambre ne peut être réservée que si elle est disponible pour la période demandée."
+
+Représentation graphique :
+
+```plaintext
++-------------+        concerne       +----------+
+| RESERVATION |------------------------→| CHAMBRE  |
++-------------+        0,n         1,1  +----------+
+```
+
+Cette CIF indique qu'une réservation doit obligatoirement concerner une et une seule chambre.
+
+### 2.4 MCD - CIM (Contraintes d'Intégrité Multiples)
+
+Les CIM sont des contraintes qui impliquent plusieurs associations ou entités.
+
+**Exemple concret :** Dans notre système hôtelier, une CIM pourrait être : "Le montant total d'une réservation doit être égal à la somme du tarif de la chambre pour la durée du séjour plus le coût des services additionnels."
+
+Cette contrainte implique les entités RESERVATION, CHAMBRE et SERVICE, ainsi que leurs associations.
+
+### 2.5 MCD - Réflexivité
+
+Une association réflexive relie une entité à elle-même.
+
+**Exemple concret :**
+Dans un système de gestion des employés d'un hôtel, on pourrait avoir une association réflexive "Supervise" sur l'entité EMPLOYE.
+
+```plaintext
++----------+
+| EMPLOYE  |
++----------+
+     ↑ 0,1
+     |
+     | Supervise
+     |
+     | 0,n
+     ↓
++----------+
+| EMPLOYE  |
++----------+
+```
+
+Cela indique qu'un employé peut superviser plusieurs autres employés, et qu'un employé est supervisé par au plus un autre employé.
+
+### 2.6 MCD - Dépendance fonctionnelle
+
+Une dépendance fonctionnelle existe lorsque la valeur d'un attribut détermine de façon unique la valeur d'un autre attribut.
+
+**Exemple concret :** Dans notre entité RESERVATION, le numéro de réservation (ID_Reservation) détermine de façon unique les dates de début et de fin du séjour.
+
+### 2.7 MCD - Règles de normalisation
+
+Les règles de normalisation aident à structurer les données de manière à minimiser la redondance et les anomalies de mise à jour.
+
+1. **Première forme normale (1NF)** : Éliminer les groupes répétitifs.
+**Exemple :** Au lieu d'avoir un attribut "Téléphones" dans l'entité CLIENT qui contiendrait plusieurs numéros, créer une entité séparée TELEPHONE reliée à CLIENT.
+2. **Deuxième forme normale (2NF)** : Éliminer les dépendances partielles.
+**Exemple :** Dans une entité RESERVATION_SERVICE qui lierait RESERVATION et SERVICE, s'assurer que tous les attributs dépendent de la clé complète (ID_Reservation, ID_Service) et non d'une partie seulement.
+3. **Troisième forme normale (3NF)** : Éliminer les dépendances transitives.
+**Exemple :** Si dans l'entité CHAMBRE, le type de chambre détermine le tarif, on pourrait créer une entité séparée TYPE_CHAMBRE avec les attributs Type et Tarif.
+
+
+### 2.8 Dictionnaire des données
+
+Le dictionnaire des données est un document qui liste et décrit tous les éléments du MCD. C'est un outil essentiel pour maintenir la cohérence et la clarté du modèle.
+
+**Exemple de structure pour notre système hôtelier :**
+
+| Nom de l'entité | Nom de l'attribut | Type de données | Contraintes  | Description                             |
+| --------------- | ----------------- | --------------- | ------------ |
+| CHAMBRE         | Numéro            | Entier          | Clé primaire | Numéro unique de la chambre             |
+| CHAMBRE         | Type              | Chaîne          | Non nul      | Type de chambre (simple, double, suite) |
+| CHAMBRE         | Tarif             | Décimal         | Non nul      | Tarif par nuit de la chambre            |
+| CLIENT          | ID_Client         | Entier          | Clé primaire | Identifiant unique du client            |
+| CLIENT          | Nom               | Chaîne          | Non nul      | Nom de famille du client                |
+| CLIENT          | Prénom            | Chaîne          | Non nul      | Prénom du client                        |
+| CLIENT          | Email             | Chaîne          | Unique       | Adresse email du client                 |
+| RESERVATION     | ID_Reservation    | Entier          | Clé primaire | Identifiant unique de la réservation    |
+| RESERVATION     | Date_Début        | Date            | Non nul      | Date de début du séjour                 |
+| RESERVATION     | Date_Fin          | Date            | Non nul      | Date de fin du séjour                   |
+
+
 
