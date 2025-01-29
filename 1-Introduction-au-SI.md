@@ -140,3 +140,42 @@ Une agence de voyages souhaite créer une base de données pour gérer ses activ
 5. Justifiez votre choix final (garder la relation ternaire ou la décomposer)
 
 **Note** : Ne donnez pas votre réponse tout de suite. Prenez le temps d'analyser les contraintes métier et leur impact sur la modélisation.
+
+
+
+**EXERCICE : École de Musique**
+
+Une école de musique souhaite mettre en place une base de données pour gérer son fonctionnement. Voici les règles métier :
+
+**Contraintes de gestion :**
+1. Chaque professeur est identifié par un numéro unique et peut enseigner plusieurs instruments
+2. Un élève peut suivre des cours avec différents professeurs pour différents instruments
+3. Un professeur ne peut pas être son propre superviseur
+4. Les professeurs expérimentés supervisent les nouveaux professeurs
+5. Un professeur débutant doit obligatoirement avoir un superviseur
+6. Un élève ne peut pas suivre deux cours du même instrument avec des professeurs différents
+7. Pour chaque cours, on doit garder une trace des évaluations trimestrielles
+8. Le niveau d'un élève pour un instrument détermine automatiquement son groupe de cours
+9. Un professeur ne peut pas évaluer un élève qu'il ne forme pas
+
+**Questions :**
+
+1. Identifiez les entités nécessaires
+
+2. Identifiez :
+   - Les dépendances fonctionnelles (DF)
+   - Les contraintes d'intégrité fonctionnelle (CIF)
+   - Les contraintes d'intégrité multiple (CIM)
+   - Les associations réflexives si nécessaire
+
+3. Proposez un MCD qui respecte toutes ces contraintes en indiquant :
+   - Les cardinalités
+   - Les CIF (avec les flèches en pointillés)
+   - Les associations nécessaires
+
+4. Justifiez vos choix de modélisation, particulièrement pour :
+   - La gestion des superviseurs
+   - La gestion des évaluations
+   - La gestion des niveaux et groupes
+
+
