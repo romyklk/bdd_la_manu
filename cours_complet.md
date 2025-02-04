@@ -1,95 +1,169 @@
-
 <style>
+/* Styles de base pour le document Markdown */
+body {
+    font-family: 'Open Sans', sans-serif;
+    line-height: 1.6;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem;
+    color: #333;
+    word-wrap: balance;
+    background-color: #f9f9f9;
+}
+
+
+/* Titres */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', sans-serif;
+    color: #2c3e50;
+    margin-top: 1rem;
+    font-weight: 600;
+}
+h1 { font-size: 2rem; solid #3498db; }
+h2 { font-size: 1.75rem;  solid #2ecc71; }
+h3 { font-size: 1.25rem; color:#301d87; }
+h4 { font-size: 1rem; color: #9b59b6; }
+
+/* Liens */
+a {
+    color: #3498db;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+a:hover {
+    color: #2980b9;
+}
+
+/* Paragraphes et texte */
+p {
+    text-align: justify;
+}
+
+/* Listes */
+ul, ol {
+    padding-left: 2rem;
+    margin-bottom: 1rem;
+}
+
+li {
+    margin-bottom: 0.5rem;
+}
+
+/* Code */
+code {
+    background-color: #f8f9fa;
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.9em;
+    color: #e83e8c;
+}
+
+pre {
+    background-color: #2c3e50;
+    color: #ecf0f1;
+    padding: 1rem;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+}
+
+pre code {
+    background-color: transparent;
+    color: inherit;
+    padding: 0;
+}
+
+/* Blockquotes */
+blockquote {
+    border-left: 4px solid #3498db;
+    margin: 1.5rem 0;
+    padding: 1rem;
+    background-color: #ecf0f1;
+    font-style: italic;
+}
+
+/* Tables */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+}
+
+th, td {
+    padding: 0.75rem;
+  border:1px solid lightgrey !important;
+}
+
+td{
+}
+
+th {
+    background-color: #3498db;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+/* Images */
+img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 1.5rem 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Séparateur horizontal */
+hr {
+    border: 0;
+    height: 2px;
+    background: linear-gradient(to right, #3498db, #2ecc71);
+    margin: 2rem 0;
+}
+
+/* Mise en évidence */
+mark {
+    background-color: #ffd700;
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+}
+
+/* Animations de transition */
+* {
+    transition: all 0.3s ease;
+}
+
+/* Media Queries pour la responsivité */
+@media (max-width: 768px) {
     body {
-        font-family: 'Avenir', 'Arial', sans-serif;
-        line-height: 1.6;
-        color: #333;
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 20px;
-        background: #fff;
+        padding: 1rem;
     }
+    
+    h1 { font-size: 2rem; }
+    h2 { font-size: 1.75rem; }
+    h3 { font-size: 1.5rem; }
+    h4 { font-size: 1.25rem; }
+}
 
-    h1 {
-        color: #2c3e50;
-        border-bottom: 2px solid #3498db;
-        padding-bottom: 10px;
-    }
-
-    h3 {
-        color: #2980b9;
-        margin-top: 30px;
-    }
-
-    strong {
-        color:#122823;
-    }
-
-    ul, ol {
-        padding-left: 20px;
-    }
-
-    li {
-        margin-bottom: 8px;
-    }
-
-    table {
-        border-collapse: collapse;
-        width: 100%;
-        margin: 20px 0;
-    }
-
-    th, td {
-        border: 1px solid #ddd;
-        padding: 12px;
-        text-align: left;
-    }
-
-    th {
-        background-color: #f8f9fa;
-        color: #2c3e50;
-    }
-
-    tr:nth-child(even) {
-        background-color: #f8f9fa;
-    }
-
-    code {
-        background: #f8f9fa;
-        padding: 2px 6px;
-        border-radius: 3px;
-        font-family: 'Courier New', monospace;
-    }
-
-    pre {
-        background: #f8f9fa;
-        padding: 15px;
-        border-radius: 5px;
-        overflow-x: auto;
-    }
-
-    hr {
-        border: none;
-        border-top: 2px solid #eee;
-        margin: 30px 0;
-    }
-
-    img {
-        max-width: 100%;
-        height: auto;
-        display: block;
-        margin: 20px auto;
-    }
-    .markdown-body code {
-        background-color: #f3f4f6;
-        padding: 0.2em 0.4em;
-        border-radius: 3px;
-        font-size: 85%;
-        color: #24292e;
-        font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
-    }
-
+.module {
+    font-size: 2.5rem;
+    color: #f8f9fa;
+    background-color: #3498db;
+    text-align: center;
+    padding: 0.5rem;
+    margin: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
 </style>
+
+
+
+
 
 
 # Introduction aux Bases de Données (BDD)
@@ -1163,21 +1237,32 @@ Les règles de normalisation aident à structurer les données de manière à mi
 ### 2.8 Dictionnaire des données
 
 Le dictionnaire des données est un document qui liste et décrit tous les éléments du MCD. C'est un outil essentiel pour maintenir la cohérence et la clarté du modèle.
+**Table CHAMBRE :**
+| Nom de l'entité | Nom de l'attribut | Type de données | Contraintes | Description |
+|-----------------|-------------------|-----------------|-------------|-------------|
+| CHAMBRE | Numéro | Entier | Clé primaire | Numéro unique de la chambre |
+| CHAMBRE | Type | Chaîne | Non nul | Type de chambre (simple, double, suite) |
+| CHAMBRE | Tarif | Décimal | Non nul | Tarif par nuit de la chambre |
 
-**Exemple de structure pour notre système hôtelier :**
+**Table CLIENT :**
+| Nom de l'entité | Nom de l'attribut | Type de données | Contraintes | Description |
+|-----------------|-------------------|-----------------|-------------|-------------|
+| CLIENT | ID_Client | Entier | Clé primaire | Identifiant unique du client |
+| CLIENT | Nom | Chaîne | Non nul | Nom de famille du client |
+| CLIENT | Prénom | Chaîne | Non nul | Prénom du client |
+| CLIENT | Email | Chaîne | Unique | Adresse email du client |
+| CLIENT | Téléphone | Chaîne | Non nul | Numéro de téléphone du client |
 
-| Nom de l'entité | Nom de l'attribut | Type de données | Contraintes  | Description                             |
-| --------------- | ----------------- | --------------- | ------------ |
-| CHAMBRE         | Numéro            | Entier          | Clé primaire | Numéro unique de la chambre             |
-| CHAMBRE         | Type              | Chaîne          | Non nul      | Type de chambre (simple, double, suite) |
-| CHAMBRE         | Tarif             | Décimal         | Non nul      | Tarif par nuit de la chambre            |
-| CLIENT          | ID_Client         | Entier          | Clé primaire | Identifiant unique du client            |
-| CLIENT          | Nom               | Chaîne          | Non nul      | Nom de famille du client                |
-| CLIENT          | Prénom            | Chaîne          | Non nul      | Prénom du client                        |
-| CLIENT          | Email             | Chaîne          | Unique       | Adresse email du client                 |
-| RESERVATION     | ID_Reservation    | Entier          | Clé primaire | Identifiant unique de la réservation    |
-| RESERVATION     | Date_Début        | Date            | Non nul      | Date de début du séjour                 |
-| RESERVATION     | Date_Fin          | Date            | Non nul      | Date de fin du séjour                   |
+**Table RESERVATION :**
+| Nom de l'entité | Nom de l'attribut | Type de données | Contraintes | Description |
+|-----------------|-------------------|-----------------|-------------|-------------|
+| RESERVATION | ID_Reservation | Entier | Clé primaire | Identifiant unique de la réservation |
+| RESERVATION | Date_Début | Date | Non nul | Date de début du séjour |
+| RESERVATION | Date_Fin | Date | Non nul | Date de fin du séjour |
 
-
-
+**Table SERVICE :**
+| Nom de l'entité | Nom de l'attribut | Type de données | Contraintes | Description |
+|-----------------|-------------------|-----------------|-------------|-------------|
+| SERVICE | ID_Service | Entier | Clé primaire | Identifiant unique du service |
+| SERVICE | Nom | Chaîne | Non nul | Nom du service proposé |
+| SERVICE | Prix | Décimal | Non nul | Prix du service |
