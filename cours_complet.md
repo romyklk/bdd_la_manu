@@ -1,4 +1,164 @@
+<style>
+/* Styles de base pour le document Markdown */
+body {
+    font-family: 'Open Sans', sans-serif;
+    line-height: 1.6;
+    max-width: 900px;
+    padding: 2rem;
+    color: #333;
+    word-wrap: balance;
+    background-color: #f9f9f9;
+}
 
+
+/* Titres */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', sans-serif;
+    color: #2c3e50;
+    margin-top: 1rem;
+    font-weight: 600;
+}
+h1 { font-size: 2rem; solid #3498db; }
+h2 { font-size: 1.75rem;  solid #2ecc71; }
+h3 { font-size: 1.25rem; color:#301d87; }
+h4 { font-size: 1rem; color: #9b59b6; }
+
+/* Liens */
+a {
+    color: #3498db;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+a:hover {
+    color: #2980b9;
+}
+
+/* Paragraphes et texte */
+p {
+    text-align: justify;
+}
+
+/* Listes */
+ul, ol {
+    padding-left: 2rem;
+    margin-bottom: 1rem;
+}
+
+li {
+    margin-bottom: 0.5rem;
+}
+
+/* Code */
+code {
+    background-color: #f8f9fa;
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.9em;
+    color: #e83e8c;
+}
+
+pre {
+    background-color: #2c3e50;
+    color: #ecf0f1 !important;
+    padding: 1rem;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+}
+
+pre code {
+    background-color: transparent;
+    color: inherit;
+    padding: 0;
+}
+
+/* Blockquotes */
+blockquote {
+    border-left: 4px solid #3498db;
+    margin: 1.5rem 0;
+    padding: 1rem;
+    background-color: #ecf0f1;
+    font-style: italic;
+}
+
+/* Tables */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+}
+
+th, td {
+    padding: 0.75rem;
+  border:1px solid lightgrey !important;
+}
+
+td{
+}
+
+th {
+    background-color: #3498db;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+/* Images */
+img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 1.5rem 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Séparateur horizontal */
+hr {
+    border: 0;
+    height: 2px;
+    background: linear-gradient(to right, #3498db, #2ecc71);
+    margin: 2rem 0;
+}
+
+/* Mise en évidence */
+mark {
+    background-color: #ffd700;
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+}
+
+/* Animations de transition */
+* {
+    transition: all 0.3s ease;
+}
+
+/* Media Queries pour la responsivité */
+@media (max-width: 768px) {
+    body {
+        padding: 1rem;
+    }
+    
+    h1 { font-size: 2rem; }
+    h2 { font-size: 1.75rem; }
+    h3 { font-size: 1.5rem; }
+    h4 { font-size: 1.25rem; }
+}
+
+.module {
+    font-size: 2.5rem;
+    color: #f8f9fa;
+    background-color: #3498db;
+    text-align: center;
+    padding: 0.5rem;
+    margin: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+</style>
 
 
 
@@ -1103,3 +1263,226 @@ Le dictionnaire des données est un document qui liste et décrit tous les élé
 | SERVICE | ID_Service | Entier | Clé primaire | Identifiant unique du service |
 | SERVICE | Nom | Chaîne | Non nul | Nom du service proposé |
 | SERVICE | Prix | Décimal | Non nul | Prix du service |
+
+
+
+
+### **Module 4 : Le Modèle Logique des Données (MLD)**
+
+---
+
+#### **Introduction**
+
+Le Modèle Logique des Données (MLD) est une étape cruciale dans la conception d'un système d'information. Il permet de traduire le Modèle Conceptuel de Données (MCD) en un modèle exploitable par un système de gestion de base de données (SGBD). Ce module vise à vous familiariser avec les concepts clés du MLD, à vous apprendre à construire un MLD à partir d'un MCD, et à vous montrer comment optimiser et vérifier ce modèle.
+
+---
+
+### **1. Introduction au MLD**
+
+#### **1.1. Passage du MCD au MLD : principes et règles de transformation**
+
+Le passage du MCD au MLD consiste à transformer les entités, associations et attributs du MCD en tables, clés primaires, clés étrangères et relations dans le MLD. Voici les principes de base :
+
+- **Entité → Table** : Chaque entité du MCD devient une table dans le MLD.
+- **Attribut → Colonne** : Les attributs de l'entité deviennent des colonnes de la table.
+- **Association → Relation** : Les associations entre entités sont traduites en relations entre tables via des clés étrangères.
+
+**Exemple :**
+
+| **MCD**                      | **MLD**                                    |
+| ---------------------------- | ------------------------------------------ |
+| Entité : Client              | Table : Client                             |
+| Attributs : ID, Nom, Adresse | Colonnes : ID (clé primaire), Nom, Adresse |
+
+#### **1.2. Concepts clés**
+
+- **Tables** : Structures de stockage des données dans une base de données relationnelle.
+- **Clé primaire** : Identifiant unique d'une table (ex : ID Client).
+- **Clé étrangère** : Colonne qui fait référence à la clé primaire d'une autre table pour établir une relation.
+- **Relations** : Liens entre tables établis via des clés étrangères.
+
+**Exemple concret :**
+
+- **Table Client** : ID (clé primaire), Nom, Adresse.
+- **Table Commande** : ID (clé primaire), Date, Montant, ID_Client (clé étrangère).
+
+---
+
+### **2. Construction du MLD**
+
+#### **2.1. Définition des tables et des relations**
+
+Pour construire un MLD, suivez ces étapes :
+
+1. **Identifier les tables** : À partir des entités du MCD.
+2. **Définir les colonnes** : À partir des attributs de chaque entité.
+3. **Ajouter les clés primaires** : Chaque table doit avoir une clé primaire unique.
+4. **Établir les relations** : Utiliser des clés étrangères pour relier les tables.
+
+**Exemple :**
+
+- **MCD** : 
+  - Entité : Client (ID, Nom, Adresse)
+  - Entité : Commande (ID, Date, Montant)
+  - Association : Un client peut passer plusieurs commandes.
+
+- **MLD** :
+  - Table Client : ID (PK), Nom, Adresse.
+  - Table Commande : ID (PK), Date, Montant, ID_Client (FK).
+
+#### **2.2. Schéma et schéma de données**
+
+- **Schéma de base de données** : Représentation visuelle des tables et de leurs relations.
+- **Schéma de données** : Description détaillée des tables, colonnes, types de données, et contraintes.
+
+**Exemple de schéma :**
+
+```
+Client (ID, Nom, Adresse)
+Commande (ID, Date, Montant, ID_Client)
+```
+
+**Relation :** Une commande est associée à un client via ID_Client.
+
+---
+
+
+# 📊 **Règles de Passage du MCD au MLD**  
+
+## ✅ **1. Transformation des Entités en Tables**  
+- **Chaque entité** du MCD devient une **table** dans le MLD.  
+- Les **attributs** de l'entité deviennent les **colonnes** de la table.  
+- L’**identifiant de l’entité** (clé primaire) est conservé comme **clé primaire** (PK) de la table.  
+
+**Exemple :**  
+MCD → **Entité : Client (id_client, nom, email)**  
+MLD → **Table Client (id_client [PK], nom, email)**  
+
+---
+
+# Passage d'un MCD (Modèle Conceptuel de Données) à un MLD (Modèle Logique de Données)
+
+Pour traduire un MCD en un MLD, il suffit d'appliquer cinq règles simples. Voici comment procéder, avec des exemples clairs pour chaque cas.
+
+## Notations des Associations
+
+Une association binaire (entre deux entités) peut être de trois types :
+
+- **1:1 (un à un)** : aucune des deux cardinalités maximales n'est "n".
+- **1:n (un à plusieurs)** : une des deux cardinalités maximales est "n".
+- **n:m (plusieurs à plusieurs)** : les deux cardinalités maximales sont "n".
+
+> **Remarque :** Le MLD ne fait pas de distinction entre (0,n) et (1,n), mais distingue (0,1) de (1,1).
+
+---
+
+## Règle 1 : Transformation des Entités
+
+**Principe :** Chaque entité devient une table. Les attributs de l'entité deviennent des colonnes, et l'identifiant de l'entité devient la clé primaire.
+
+**Exemple :**
+
+L'entité **Article** possède :
+- Numéro d'article (identifiant)
+- Désignation
+- Prix unitaire
+
+Cela donne la table **Article** avec les colonnes correspondantes.
+
+---
+
+## Règle 2 : Association Binaire de Type 1:n
+
+**Principe :** L'association disparaît. On ajoute une clé étrangère dans la table correspondant au côté "n", qui référence la clé primaire de la table du côté "1".
+
+- Si la cardinalité est (1,1), la clé étrangère ne peut pas être vide.
+- Les attributs de l'association sont ajoutés à la table du côté "n".
+
+**Exemple :**
+
+Un **Fournisseur** peut livrer plusieurs **Livraisons**, mais chaque livraison est réalisée par un seul fournisseur.
+
+La table **Livraison** contient une référence vers le fournisseur.
+
+---
+
+## Règle 3 : Association Binaire de Type n:m
+
+**Principe :** L'association devient une table supplémentaire (appelée table de jonction). La clé primaire de cette table est composée des deux clés étrangères référençant les entités associées.
+
+- Les attributs de l'association deviennent des colonnes de cette table.
+
+**Exemple :**
+
+Un **Article** peut apparaître dans plusieurs **Commandes**, et une **Commande** peut contenir plusieurs articles.
+
+Une table intermédiaire **Ligne de Commande** relie les deux, avec un attribut comme la quantité commandée.
+
+---
+
+## Règle 4 : Association Binaire de Type 1:1
+
+**Principe :**
+
+- L'association est traitée comme une association 1:n, mais avec une contrainte d'unicité sur la clé étrangère.
+- Si les deux cardinalités sont (0,1), la clé étrangère peut être placée indifféremment dans l'une des deux tables.
+
+**Exemple :**
+
+Chaque **Service** est dirigé par un seul **Employé**, et chaque **Employé** peut diriger un seul service.
+
+La clé étrangère est ajoutée à la table du service, avec une contrainte d'unicité.
+
+---
+
+## Règle 5 : Association Non Binaire (Ternaires ou Plus)
+
+**Principe :** L'association devient une table supplémentaire. La clé primaire est composée des clés étrangères référençant les entités concernées. Les attributs de l'association deviennent des colonnes.
+
+**Exemple :**
+
+Un **Film** peut être projeté dans une **Salle** à un **Créneau** horaire spécifique.
+
+La table **Projection** contiendra des références aux trois entités et un attribut supplémentaire comme le tarif.
+
+---
+
+
+### **Conclusion**
+
+Le Modèle Logique des Données (MLD) est une étape essentielle dans la conception d'un système d'information. Il permet de traduire le MCD en un modèle exploitable par un SGBD, en définissant des tables, des clés primaires, des clés étrangères et des relations. La construction du MLD nécessite une attention particulière à la normalisation et à la vérification des relations pour garantir l'intégrité et l'efficacité de la base de données.
+
+---
+
+### **Annexes**
+
+#### **Tableau récapitulatif des transformations MCD → MLD**
+
+| **MCD**     | **MLD**                  |
+| ----------- | ------------------------ |
+| Entité      | Table                    |
+| Attribut    | Colonne                  |
+| Association | Relation (clé étrangère) |
+| Identifiant | Clé primaire             |
+
+#### **Exemple complet de MCD et MLD**
+
+**MCD :**
+
+- Entité : Étudiant (ID, Nom, Prénom)
+- Entité : Cours (ID, Nom, Description)
+- Association : Un étudiant peut s'inscrire à plusieurs cours.
+
+**MLD :**
+
+- Table Étudiant : ID (PK), Nom, Prénom.
+- Table Cours : ID (PK), Nom, Description.
+- Table Inscription : ID_Étudiant (FK), ID_Cours (FK).
+
+**Schéma de données :**
+
+```
+Étudiant (ID, Nom, Prénom)
+Cours (ID, Nom, Description)
+Inscription (ID_Étudiant, ID_Cours)
+```
